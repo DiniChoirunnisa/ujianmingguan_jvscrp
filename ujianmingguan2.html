@@ -1,0 +1,160 @@
+<!DOCTYPE html> 
+
+<html> 
+	<head>
+		<title> Tugas HTML </title>
+		<link rel="stylesheet" href="boostrap/css/bootstrap.min.css">
+	
+	<style>
+	
+	body{
+		background:lightgrey;
+		margin:auto;
+		width:900px;
+		}
+	.header {
+		background:lightgrey;
+		text-align:center;
+		}
+	.navbar-left { 
+				background: #339966;
+				width:668px;
+				valign:middle; <!-- untuk membuat navbar ada ditengah2 tulisannya-->
+				}
+	a { color: white; 
+		}
+	.kolom1 {
+		padding:10px;
+		background:white;
+		border-bottom: 30px solid lightgrey;
+		}
+	.artikel {
+		background:white;
+		clear:both;
+		padding:10px;
+		border-bottom: 40px solid lightgrey; <!-- untuk membuat spasi ada ditengah2 kolom-->
+		}
+	h6 {
+		text-align:right;
+		}
+	td {
+		width:200px;
+		}
+	</style>
+	</head> 
+	<body>
+	
+	<div class="header">
+	<h3><b> Test Modul HTML, CSS dan Javascript </b></h3>
+	<br>
+	</div>	
+	
+	<div class="row">
+			<div class="col-md-9">
+			<nav class="navbar navbar-justified navbar">
+				<ul class="nav navbar-nav navbar-left">
+					<li><a href="ujianmingguan1.html"> HOME </a></li>
+					<li><a href="ujianmingguan2.html"> Hitung </a></li>
+				</ul>
+			</nav>
+	
+	
+	<div class="artikel">
+			<table>
+			<tr>
+				<td><label for="nama"> Nama Pemesan</label></td>
+				<td><b>: </b><input type="text" name="nama" id="nama"></td>
+			</tr>
+
+		<!-- untuk select-->
+			<tr>
+				<td><label for="jurusan"> Jurusan</label></td>
+				<td><b>: </b><select name="jurusan" id="jurusan">
+				<option value="BSD-Bandung"> BSD-Bandung </option>
+				<option value="Bandung-BSD"> Bandung-BSD </option>
+				<option value="BSD-Bandara"> BSD-Bandara </option>
+				<option value="Bandara-BSD"> Bandara-BSD </option>
+			</select></td>
+			</tr>
+			
+		<!--input status anggota-->
+			<tr>
+				<td><label for="status"> Jam keberangkatan </label></td>
+				<td><b>: </b><input type="radio" name="status" id="rad1" value="NonMember">10.00
+				<input type="radio" name="status" id="rad2" value="Member">22.00</td>
+			</tr>
+		<!--input jumlah kursi-->
+	
+			<tr>
+				<td><label for="jumlahkursi"> Jumlah Pesanan </label></td>
+				<td><b>: </b><input type="number" name="jumlahkursi" id="jumlahkursi"></td>
+			</tr>
+			</table>
+		
+		<!--input submit dan reset-->
+			<hr>
+				<input onclick="kirim();" type="submit" name="submit_button" id="button" value="Hitung">
+				<input type="reset" name="reset_button" value="Reset">
+			<br><br>		
+		
+		<!--input hasil-->
+			<p>Hasil Perhitungan : </p>
+			<label for="hasil"> </label>
+			<textarea id="hasil" cols="40" rows="2"></textarea>
+	
+		<script type="text/javascript">
+			function kirim(){
+				
+				var hasil=null;
+				
+				//ambil nama
+				var nama=document.getElementById("nama").value;
+				//deklarasi variabel radio member
+				var radio1=document.getElementById("rad1");
+				var radio2=document.getElementById("rad2");
+				//ambil jurusan
+				var jurusan=document.getElementById("jurusan").value;
+				//ambil jumlah kursi
+				var jumlahkursi=document.getElementById("jumlahkursi").value;
+				//variabel untuk menghitung
+				var status, harga, total, diskon, bayar;
+				//validasi agar tidak ada data yang kosong
+				if (nama!="" && jumlahkursi!="" && jurusan!="" && (radio1.checked||radio2.checked)){
+					//kondisi untuk cek jurusan dan menetapkan harga
+					if (jurusan=="BSD-Bandung"){
+						harga = 100000; }
+					else if (jurusan=="Bandung-BSD"){
+						harga = 120000; }
+					else if (jurusan=="BSD-Bandara"){
+						harga = 80000; }
+					else if (jurusan=="Bandara-BSD"){
+						harga = 90000; }
+					//menghitung total dari harga*jumlah kursi
+					total=harga*jumlahkursi;
+					//mengecek status member dan menghitung diskon
+					if (radio1.checked){
+						status="10.00";
+						diskon=0;}
+					else if (radio2.checked){
+						status="22.00";
+						diskon=total*0.1;}
+					//menghitung total bayar
+					bayar=total-diskon;
+					//mencetak data di text area
+					document.getElementById("hasil").innerHTML= "Nama Pemesan : "+nama+"\n"+
+																"Jurusan : "+jurusan+"\n"+
+																"Jumlah Kursi : "+jumlahkursi+"\n"+
+																"Keberangkatan : "+status+" (maka diskon 10%)"+"\n"+
+																"Total yang harus dibayar : "+bayar;
+					}
+				else 
+				{
+				//alert jika ada yang belum diisi
+				alert ("Lengkapi terlebih dahulu");
+				}	
+			}
+		
+		</script>
+	
+	</body>
+</html>		
